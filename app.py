@@ -56,6 +56,16 @@ def send_email(receiver, file_path):
 
 # ------------------ INPUTS ------------------
 uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
+
+# ------------------ CSV PREVIEW ------------------
+if uploaded_file is not None:
+    try:
+        preview_df = pd.read_csv(uploaded_file)
+        st.subheader("Preview Input CSV")
+        st.dataframe(preview_df.head())
+    except Exception:
+        st.error("Unable to preview CSV file. Please check the format.")
+        
 weights = st.text_input("Enter weights (comma-separated)")
 impacts = st.text_input("Enter impacts (+ or -, comma-separated)")
 email = st.text_input("Enter email address (optional)")
@@ -95,8 +105,11 @@ if st.button("Run TOPSIS"):
                     mime="text/csv"
                 )
 
-                send_email(email, output_path)
-                st.success("TOPSIS result emailed successfully!")
+                if email.strip():
+                    send_email(email, output_path)
+                    st.success("TOPSIS result emailed successfully!")
+                else:
+                    st.success("TOPSIS computation completed successfully!")
 
         except Exception as e:
             st.error(str(e))
