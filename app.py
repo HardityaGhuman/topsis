@@ -66,7 +66,7 @@ if uploaded_file is not None:
     except Exception:
         st.error("Unable to preview CSV file. Please check the format.")
 
-weights = st.text_input("Enter weights (comma-separated)")
+weights = st.text_input("Enter weights (comma-separated, sum should be 1.0)")
 impacts = st.text_input("Enter impacts (+ or -, comma-separated)")
 email = st.text_input("Enter email address (optional)")
 
@@ -81,7 +81,7 @@ if st.button("Run TOPSIS"):
                 input_path = os.path.join(tmpdir, "input.csv")
                 output_path = os.path.join(tmpdir, "output.csv")
 
-                uploaded_file.seek(0)   # <-- IMPORTANT
+                uploaded_file.seek(0)   
                 df = pd.read_csv(uploaded_file)
                 df.to_csv(input_path, index=False)
 
