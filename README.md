@@ -47,7 +47,6 @@ https://topsis-gkmcunhxhys67pydcuxma2.streamlit.app/
 ### Features
 - Upload CSV file or download sample CSV file
 - Enter weights and impacts
-- Preview inputs
 - Can provide email address to get results sent via mail
 - Preview inputs and outputs
 
