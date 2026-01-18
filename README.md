@@ -1,6 +1,6 @@
 # TOPSIS – Decision Support System
 
-This project implements the TOPSIS (Technique for Order Preference by Similarity to Ideal Solution) method for multi-criteria decision making. It covers all three parts of the assignment: a command-line program, a Python package, and a web service.
+This project implements the TOPSIS (Technique for Order Preference by Similarity to Ideal Solution) method for multi criteria decision making.
 
 ---
 
@@ -45,11 +45,11 @@ A public web service is implemented using Streamlit.
 https://topsis-gkmcunhxhys67pydcuxma2.streamlit.app/
 
 ### Features
-- Upload CSV file
+- Upload CSV file or download sample CSV file
 - Enter weights and impacts
-- Provide email address
-- Result CSV is sent via email
-- Uses the same TOPSIS logic as the CLI and package
+- Preview inputs
+- Can provide email address to get results sent via mail
+- Preview inputs and outputs
 
 ---
 
