@@ -44,6 +44,50 @@ def validate_input_file(input_file, weights, impacts):
 
     return df
 
+def compute_topsis(df, weights, impacts):
+    # Extract criteria matrix (2nd to last columns)
+    criteria = df.iloc[:, 1:].values.astype(float)
+
+    # Step 1: Normalize
+    norm = np.sqrt((criteria ** 2).sum(axis=0))
+    normalized = criteria / norm
+
+    # Step 2: Normalize weights to sum to 1
+    weights = np.array(weights, dtype=float)
+
+    weight_sum = weights.sum()
+    if weight_sum == 0:
+        error("Sum of weights must be greater than 0")
+
+    weights = weights / weight_sum
+
+    # Apply weights
+    weighted = normalized * weights
+
+    # Step 3: Ideal best and worst
+    ideal_best = []
+    ideal_worst = []
+
+    for i in range(len(impacts)):
+        if impacts[i] == "+":
+            ideal_best.append(weighted[:, i].max())
+            ideal_worst.append(weighted[:, i].min())
+        else:
+            ideal_best.append(weighted[:, i].min())
+            ideal_worst.append(weighted[:, i].max())
+
+    ideal_best = np.array(ideal_best)
+    ideal_worst = np.array(ideal_worst)
+
+    # Step 4: Distance calculation
+    dist_best = np.sqrt(((weighted - ideal_best) ** 2).sum(axis=1))
+    dist_worst = np.sqrt(((weighted - ideal_worst) ** 2).sum(axis=1))
+
+    # Step 5: Topsis score
+    score = dist_worst / (dist_best + dist_worst)
+
+    return score
+
 def main():
     # Expected arguments:
     # cli.py input.csv weights impacts output.csv
@@ -83,11 +127,15 @@ def main():
 
     df = validate_input_file(input_file, weights, impacts)
 
-    print("CLI arguments validated successfully.")
-    print("Input file :", input_file)
-    print("Weights    :", weights)
-    print("Impacts    :", impacts)
-    print("Output file:", output_file)
+    scores = compute_topsis(df, weights, impacts)
+
+    df["Topsis Score"] = scores
+    df["Rank"] = df["Topsis Score"].rank(ascending=False).astype(int)
+
+    df.to_csv(output_file, index=False)
+
+    print("TOPSIS computation completed successfully.")
+    print("Output written to:", output_file)
 
 
 if __name__ == "__main__":
