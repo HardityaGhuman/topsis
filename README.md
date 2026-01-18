@@ -1,43 +1,57 @@
-# TOPSIS CLI
+# TOPSIS – Decision Support System
 
-Python command-line implementation of the TOPSIS method.
+This project implements the TOPSIS (Technique for Order Preference by Similarity to Ideal Solution) method for multi-criteria decision making. It covers all three parts of the assignment: a command-line program, a Python package, and a web service.
 
-## Install
-```bash
+---
+
+## Part I — Command Line Interface (CLI)
+
+### Install (local)
 pip install .
-```
 
-## Run
-```bash
+### Run
 topsis <input.csv> "<weights>" "<impacts>" <output.csv>
-```
 
 ### Example
-```bash
 topsis data.csv "1,1,1" "+,+,+" result.csv
-```
 
-## Input
+### Input
 - CSV file
 - First column: alternatives
 - Remaining columns: numeric criteria
 
-## Output
-- Adds `Topsis Score` and `Rank`
+### Output
+- Adds `Topsis Score` and `Rank` columns to the CSV
 
-## Web App (Streamlit)
+---
 
-A simple Streamlit based web interface is also included.
+## Part II — Python Package (PyPI)
+
+The project is packaged and published on PyPI.
+
+### Install from PyPI
+pip install Topsis-Harditya-102303230
+
+### Run
+topsis data.csv "1,1,1" "+,+,+" result.csv
+
+---
+
+## Part III — Web Service (Streamlit)
+
+A public web service is implemented using Streamlit.
+
+### Live Web App
+https://topsis-gkmcunhxhys67pydcuxma2.streamlit.app/
 
 ### Features
 - Upload CSV file
 - Enter weights and impacts
-- Compute TOPSIS using the same package logic
-- Result CSV is emailed to the provided address
+- Provide email address
+- Result CSV is sent via email
+- Uses the same TOPSIS logic as the CLI and package
 
-### Run locally
-```bash
-streamlit run app.py
+---
 
 ## Author
 Harditya Vir Singh Ghuman
