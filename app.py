@@ -58,13 +58,13 @@ def send_email(receiver, file_path):
 uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
 weights = st.text_input("Enter weights (comma-separated)")
 impacts = st.text_input("Enter impacts (+ or -, comma-separated)")
-email = st.text_input("Enter email address")
+email = st.text_input("Enter email address (optional)")
 
 
 # ------------------ RUN TOPSIS ------------------
 if st.button("Run TOPSIS"):
-    if not uploaded_file or not weights or not impacts or not email:
-        st.error("All fields are required.")
+    if not uploaded_file or not weights or not impacts:
+        st.error("CSV file, weights, and impacts are required.")
     else:
         try:
             with tempfile.TemporaryDirectory() as tmpdir:
