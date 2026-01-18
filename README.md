@@ -25,5 +25,19 @@ topsis data.csv "1,1,1" "+,+,+" result.csv
 ## Output
 - Adds `Topsis Score` and `Rank`
 
+## Web App (Streamlit)
+
+A simple Streamlit based web interface is also included.
+
+### Features
+- Upload CSV file
+- Enter weights and impacts
+- Compute TOPSIS using the same package logic
+- Result CSV is emailed to the provided address
+
+### Run locally
+```bash
+streamlit run app.py
+
 ## Author
 Harditya Vir Singh Ghuman

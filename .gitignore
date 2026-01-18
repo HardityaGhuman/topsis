@@ -15,3 +15,4 @@ dist/
 
 # Test/output files
 *.csv
+.env
